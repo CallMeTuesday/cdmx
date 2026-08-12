@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>CDMX — Tues &amp; Alice</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,400..900;1,62..125,400..900&family=Newsreader:ital,opsz,wght@0,6..72,300..600;1,6..72,300..600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --basalt:#17151A;
+  --tezontle:#5B2230;
+  --rosa:#B51E4C;
+  --ochre:#B87C1F;
+  --jade:#2C5A4C;
+  --cal:#EFE8DA;
+  --cal-dim:rgba(239,232,218,.72);
+  --hair:rgba(239,232,218,.22);
+  --display:'Archivo',system-ui,sans-serif;
+  --body:'Newsreader',Georgia,serif;
+  --mono:'DM Mono',ui-monospace,monospace;
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html{scroll-behavior:smooth;font-size:16px;-webkit-text-size-adjust:100%}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{animation:none!important;transition:none!important}}
+body{
+  margin:0;background:var(--basalt);color:var(--cal);
+  font-family:var(--body);font-size:1rem;line-height:1.55;
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:680px;margin:0 auto}
+
+/* ---------- hero ---------- */
+.hero{background:var(--tezontle);padding:3.5rem 1.25rem 2rem;position:relative;overflow:hidden}
+.hero::after{
+  content:'';position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(104deg,rgba(255,236,200,.16) 0%,rgba(255,236,200,.03) 34%,transparent 58%);
+}
+.eyebrow{
+  font-family:var(--mono);font-size:1rem;letter-spacing:.06em;
+  text-transform:uppercase;color:var(--cal-dim);margin:0 0 1rem;
+}
+h1{
+  font-family:var(--display);font-variation-settings:'wdth' 118,'wght' 800;
+  font-size:clamp(3rem,13vw,4rem);line-height:.9;letter-spacing:-.02em;
+  text-transform:uppercase;margin:0 0 1rem;position:relative;z-index:1;
+}
+.hero p{margin:0;font-size:1.25rem;line-height:1.45;color:var(--cal-dim);position:relative;z-index:1;max-width:32ch}
+.base{
+  margin-top:1.5rem;padding-top:1rem;border-top:1px solid var(--hair);
+  font-family:var(--mono);font-size:1rem;line-height:1.6;position:relative;z-index:1;
+}
+.base a{color:var(--cal);text-decoration:none;border-bottom:1px solid var(--hair)}
+
+/* ---------- sticky nav ---------- */
+nav{
+  position:sticky;top:0;z-index:20;background:var(--basalt);
+  border-bottom:1px solid var(--hair);
+  display:flex;overflow-x:auto;scrollbar-width:none;
+}
+nav::-webkit-scrollbar{display:none}
+nav a{
+  flex:0 0 auto;padding:1rem 1rem;color:var(--cal-dim);text-decoration:none;
+  font-family:var(--mono);font-size:1rem;letter-spacing:.04em;
+  white-space:nowrap;
+}
+nav a:active{color:var(--cal)}
+
+/* ---------- generic section ---------- */
+section{padding:2.75rem 1.25rem}
+.sechead{
+  font-family:var(--display);font-variation-settings:'wdth' 112,'wght' 750;
+  font-size:1rem;letter-spacing:.14em;text-transform:uppercase;
+  margin:0 0 .5rem;color:var(--cal);
+}
+.secsub{margin:0 0 1.5rem;color:var(--cal-dim);font-size:1.125rem;line-height:1.5;max-width:38ch}
+
+/* ---------- alert ---------- */
+.alert{background:var(--rosa);padding:1.75rem 1.25rem}
+.alert h2{
+  font-family:var(--display);font-variation-settings:'wdth' 116,'wght' 800;
+  text-transform:uppercase;font-size:1.5rem;letter-spacing:-.01em;margin:0 0 .75rem;line-height:1.05;
+}
+.alert p{margin:0 0 .75rem;font-size:1.0625rem;line-height:1.5}
+.alert p:last-child{margin-bottom:0}
+.alert .mono{font-family:var(--mono);font-size:1rem;letter-spacing:.01em;color:rgba(239,232,218,.85)}
+
+/* ---------- street strip ---------- */
+.street{background:var(--jade);padding:2.5rem 1.25rem}
+.street ol{list-style:none;margin:0;padding:0}
+.street li{display:flex;gap:.875rem;align-items:baseline;padding:.875rem 0;border-bottom:1px solid var(--hair)}
+.street li:last-child{border-bottom:0}
+.street .num{font-family:var(--mono);font-size:1rem;color:var(--cal-dim);flex:0 0 5.5rem}
+.street .who{flex:1;min-width:0}
+.street .who b{
+  font-family:var(--display);font-variation-settings:'wdth' 105,'wght' 700;
+  font-size:1.125rem;display:block;letter-spacing:.005em;
+}
+.street .who span{font-size:1rem;color:var(--cal-dim);display:block;margin-top:.125rem}
+
+/* ---------- search + filters ---------- */
+.tools{margin-bottom:1.25rem}
+#q{
+  width:100%;padding:.875rem;background:transparent;
+  border:1px solid var(--hair);border-radius:0;color:var(--cal);
+  font-family:var(--mono);font-size:1rem;
+}
+#q::placeholder{color:rgba(239,232,218,.45)}
+#q:focus{outline:2px solid var(--ochre);outline-offset:1px}
+.chips{display:flex;flex-wrap:wrap;gap:.375rem;margin-top:.75rem}
+.chip{
+  font-family:var(--mono);font-size:1rem;letter-spacing:.02em;
+  padding:.5rem .75rem;border:1px solid var(--hair);background:transparent;color:var(--cal-dim);
+  cursor:pointer;border-radius:0;line-height:1.2;
+}
+.chip[aria-pressed="true"]{background:var(--ochre);border-color:var(--ochre);color:var(--basalt)}
+.chip:focus-visible{outline:2px solid var(--ochre);outline-offset:2px}
+
+/* ---------- place list ---------- */
+.grouphead{
+  font-family:var(--mono);font-size:1rem;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--ochre);margin:2rem 0 .25rem;padding-bottom:.5rem;border-bottom:1px solid var(--hair);
+}
+.place{padding:1.125rem 0;border-bottom:1px solid var(--hair);display:block;text-decoration:none;color:inherit}
+.place:active{background:rgba(239,232,218,.05)}
+.pname{
+  font-family:var(--display);font-variation-settings:'wdth' 104,'wght' 700;
+  font-size:1.25rem;line-height:1.25;letter-spacing:.005em;margin:0 0 .25rem;
+  display:flex;align-items:baseline;gap:.5rem;
+}
+.star{color:var(--ochre);font-size:1rem;flex:0 0 auto}
+.pmeta{font-family:var(--mono);font-size:1rem;line-height:1.4;color:var(--cal-dim);margin:0 0 .375rem;letter-spacing:0}
+.pnote{font-size:1.0625rem;line-height:1.5;color:rgba(239,232,218,.92);margin:0}
+.pin{font-family:var(--mono);font-size:1rem;color:var(--ochre);letter-spacing:.04em;margin-top:.5rem;display:inline-block}
+#count{font-family:var(--mono);font-size:1rem;color:var(--cal-dim);margin-top:1.25rem}
+.empty{padding:2rem 0;color:var(--cal-dim);font-size:1.0625rem}
+
+/* ---------- itinerary planes ---------- */
+.day{padding:2.5rem 1.25rem;position:relative;overflow:hidden}
+.day::after{
+  content:'';position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(104deg,rgba(255,236,200,.13) 0%,rgba(255,236,200,.02) 38%,transparent 62%);
+}
+.day > *{position:relative;z-index:1}
+.d1{background:var(--tezontle)}
+.d2{background:var(--jade)}
+.d3{background:var(--rosa)}
+.d4{background:#3A2E4A}
+.d5{background:var(--ochre);color:var(--basalt)}
+.d6{background:#1F3B52}
+.d7{background:var(--tezontle)}
+.d8{background:var(--jade)}
+.d9{background:var(--rosa)}
+.d10{background:var(--basalt)}
+.d5 .dlabel,.d5 .slot,.d5 .dnote{color:rgba(23,21,26,.78)}
+.d5 .drow,.d5 .dnote{border-color:rgba(23,21,26,.25)}
+.dlabel{font-family:var(--mono);font-size:1rem;letter-spacing:.1em;text-transform:uppercase;color:var(--cal-dim);margin:0 0 .5rem}
+.dtitle{
+  font-family:var(--display);font-variation-settings:'wdth' 116,'wght' 800;
+  font-size:clamp(2rem,8.5vw,2.75rem);line-height:.95;text-transform:uppercase;
+  letter-spacing:-.015em;margin:0 0 1.25rem;
+}
+.drow{display:flex;gap:.875rem;padding:.875rem 0;border-bottom:1px solid var(--hair);align-items:baseline}
+.drow:last-of-type{border-bottom:0}
+.slot{font-family:var(--mono);font-size:1rem;color:var(--cal-dim);flex:0 0 4.5rem;letter-spacing:0}
+.dbody{flex:1;min-width:0}
+.dbody b{font-family:var(--display);font-variation-settings:'wdth' 104,'wght' 700;font-size:1.125rem;line-height:1.3;display:block}
+.dbody span{font-size:1.0625rem;line-height:1.5;opacity:.9;display:block;margin-top:.1875rem}
+.dnote{
+  margin:1.25rem 0 0;padding-top:1rem;border-top:1px solid var(--hair);
+  font-family:var(--mono);font-size:1rem;line-height:1.55;color:var(--cal-dim);
+}
+
+/* ---------- cheat ---------- */
+.cheat dl{margin:0}
+.cheat dt{
+  font-family:var(--display);font-variation-settings:'wdth' 104,'wght' 700;
+  font-size:1.125rem;margin-top:1.25rem;
+}
+.cheat dd{margin:.25rem 0 0;color:var(--cal-dim);font-size:1.0625rem;line-height:1.5}
+footer{padding:2.25rem 1.25rem 4rem;border-top:1px solid var(--hair);font-family:var(--mono);font-size:1rem;color:var(--cal-dim);line-height:1.7}
+
+@media (min-width:600px){
+  html{font-size:17px}
+  .hero{padding:4rem 2rem 2.25rem}
+  section,.day,.alert,.street,footer{padding-left:2rem;padding-right:2rem}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="hero">
+  <p class="eyebrow">Roma Norte · nine nights</p>
+  <h1>Mexico<br>City</h1>
+  <p>Everything worth walking to, and a schedule loose enough to ignore.</p>
+  <div class="base">
+    BASE — Jalapa 82, Roma Norte 06700<br>
+    <a href="https://www.google.com/maps/search/?api=1&query=Jalapa%2082%2C%20Roma%20Norte%2C%2006700%20Ciudad%20de%20M%C3%A9xico" target="_blank" rel="noopener">Open in Maps →</a>
+  </div>
+</header>
+
+<nav>
+  <a href="#heads-up">Heads-up</a>
+  <a href="#street">Your street</a>
+  <a href="#places">Places</a>
+  <a href="#plan">The plan</a>
+  <a href="#cheat">Notes</a>
+</nav>
+
+<div class="alert" id="heads-up">
+  <h2>Choza closes at 9</h2>
+  <p>Choza is walk-in only, no reservations, not listed on Google, and open <b>Saturday, Sunday and Monday only, roughly 3–9pm</b>. Monterrey 194, next door to Hank's Pizza — no sign.</p>
+  <p>Monday is the Lunes Listening Lounge: three records played end to end with guest selectors. That's the night you want, but if Alice finishes at 7–8 you get under an hour and there's usually a line.</p>
+  <p><b>Fix:</b> go alone around 5:30, wait it out in the downstairs listening room (which is the good part), eat, and have Alice join at 8. Or take it on Saturday instead and lose the listening lounge.</p>
+  <p class="mono">Verify on Instagram @choza_cdmx before you go — hours move.</p>
+</div>
+
+<section class="street" id="street">
+  <p class="sechead">Calle Jalapa</p>
+  <p class="secsub" style="color:rgba(239,232,218,.72)">Walk south from the door. Four of the best things on this whole list are on your own block.</p>
+  <ol>
+    <li><span class="num">No. 82</span><span class="who"><b>You</b><span>The Airbnb</span></span></li>
+    <li><span class="num">No. 125</span><span class="who"><b>Lengua Concept</b><span>Jewelry, local makers, loud sound system. 11–8 daily</span></span></li>
+    <li><span class="num">No. 164</span><span class="who"><b>Black Market Records</b><span>Best-curated crates in Roma. Splits for lunch</span></span></li>
+    <li><span class="num">No. 185</span><span class="who"><b>Cruzada</b><span>Sculptural .925. The buy. 11–8, Sun 12–6</span></span></li>
+  </ol>
+</section>
+
+<section id="places">
+  <p class="sechead">Places</p>
+  <p class="secsub">Everything from the shared list, minus what's closed, plus what I added. Stars are mine. Tap any name to open it in Maps.</p>
+  <div class="tools">
+    <input id="q" type="search" placeholder="Search places…" autocomplete="off" aria-label="Search places">
+    <div class="chips" id="chips"></div>
+  </div>
+  <div id="list"></div>
+  <p id="count"></p>
+</section>
+
+<section style="padding-bottom:0" id="plan">
+  <p class="sechead">The plan</p>
+  <p class="secsub">Built around the hours that actually constrain you. Everything else is optional.</p>
+</section>
+
+<div class="day d1">
+  <p class="dlabel">Friday · arrival</p>
+  <h2 class="dtitle">Land, drop bags,<br>walk your street</h2>
+  <div class="drow"><span class="slot">11:00</span><div class="dbody"><b>MEX → Jalapa 82</b><span>Uber, 40–70 min depending on traffic</span></div></div>
+  <div class="drow"><span class="slot">13:00</span><div class="dbody"><b>Expendio de Maíz</b><span>Yucatán 84, four blocks. No menu, cash only, communal. Open Fri till 8:30</span></div></div>
+  <div class="drow"><span class="slot">15:00</span><div class="dbody"><b>The Jalapa crawl</b><span>Lengua → Black Market → Cruzada. All within five blocks</span></div></div>
+  <div class="drow"><span class="slot">17:00</span><div class="dbody"><b>Revancha</b><span>Colima 110. Soul, funk, hip hop, strong used section</span></div></div>
+  <div class="drow"><span class="slot">20:00</span><div class="dbody"><b>Taquería Orinoco</b><span>Álvaro Obregón 100. Open till 5:30am Fridays</span></div></div>
+  <div class="drow"><span class="slot">23:00</span><div class="dbody"><b>Alice lands</b><span>Orinoco is still open if she wants food after</span></div></div>
+  <p class="dnote">Don't schedule anything for Alice tonight. She'll have been travelling all day.</p>
+</div>
+
+<div class="day d2">
+  <p class="dlabel">Saturday</p>
+  <h2 class="dtitle">South to the<br>volcanic stone</h2>
+  <div class="drow"><span class="slot">08:30</span><div class="dbody"><b>Panadería Rosetta</b><span>Colima 179. Get there before 9 or queue 30 min</span></div></div>
+  <div class="drow"><span class="slot">10:30</span><div class="dbody"><b>El Bazar Sábado</b><span>San Ángel. Saturday only — this is the one day it exists</span></div></div>
+  <div class="drow"><span class="slot">13:30</span><div class="dbody"><b>Lunch in San Ángel</b><span>Then 15 min east to Coyoacán</span></div></div>
+  <div class="drow"><span class="slot">15:00</span><div class="dbody"><b>Museo Anahuacalli</b><span>Rivera's volcanic-stone fortress. Closes 5:30. The best building on this list</span></div></div>
+  <div class="drow"><span class="slot">20:00</span><div class="dbody"><b>Meroma</b><span>Colima 150, five min from home, open till 11. Reserve</span></div></div>
+  <p class="dnote">Choza is also open Sat 3–9 — but it collides with Anahuacalli. Pick one.</p>
+</div>
+
+<div class="day d3">
+  <p class="dlabel">Sunday</p>
+  <h2 class="dtitle">Slow, then<br>the ballroom</h2>
+  <div class="drow"><span class="slot">10:00</span><div class="dbody"><b>Cicatriz or Café Nin</b><span>Both Juárez, ten min walk. Nin opens 7:30 Sun</span></div></div>
+  <div class="drow"><span class="slot">13:00</span><div class="dbody"><b>Contramar</b><span>Durango 200. Sunday lunch is the whole point of the place. Reserve</span></div></div>
+  <div class="drow"><span class="slot">15:30</span><div class="dbody"><b>Casa Bosques + Georgetown</b><span>Both open Sunday. Hi-BYE, VOID and Diggin are all closed</span></div></div>
+  <div class="drow"><span class="slot">18:30</span><div class="dbody"><b>Salón Los Ángeles</b><span>Lerdo 206, Guerrero. Live orchestra, danzón and salsa, since the 1930s. Sunday is a dance night</span></div></div>
+  <p class="dnote">Salón Los Ángeles is the single best thing on this page for you. Take a taxi both ways — the neighbourhood is fine, the walk isn't.</p>
+</div>
+
+<div class="day d4">
+  <p class="dlabel">Monday · work</p>
+  <h2 class="dtitle">Lunes<br>listening lounge</h2>
+  <div class="drow"><span class="slot">08:00</span><div class="dbody"><b>Blom Nápoles or Rosetta</b><span>Coffee before the desk</span></div></div>
+  <div class="drow"><span class="slot">13:00</span><div class="dbody"><b>Lunch on Jalapa</b><span>Tacos La Chula, or Frutos Prohibidos for something lighter</span></div></div>
+  <div class="drow"><span class="slot">17:30</span><div class="dbody"><b>Choza — you, early</b><span>Monterrey 194. No sign. Get in the door, wait downstairs</span></div></div>
+  <div class="drow"><span class="slot">20:00</span><div class="dbody"><b>Alice joins</b><span>Closes around 9. Message her the exact door — it's unmarked</span></div></div>
+</div>
+
+<div class="day d6">
+  <p class="dlabel">Tuesday · work</p>
+  <h2 class="dtitle">Break out<br>at midday</h2>
+  <div class="drow"><span class="slot">13:00</span><div class="dbody"><b>Biblioteca Vasconcelos</b><span>Free, open till 7:30, 15 min north. Kalach's hanging stacks — a real lunch break, not a museum trip</span></div></div>
+  <div class="drow"><span class="slot">18:00</span><div class="dbody"><b>Revancha or Diggin Vinyl</b><span>Diggin closes at 8, upstairs unit at Zacatecas 24</span></div></div>
+  <div class="drow"><span class="slot">20:30</span><div class="dbody"><b>Páramo or Fugaz</b><span>Both Roma, both fine to walk into</span></div></div>
+  <p class="dnote">Salón Los Ángeles also runs Tuesday nights, if Sunday got away from you.</p>
+</div>
+
+<div class="day d7">
+  <p class="dlabel">Wednesday · work</p>
+  <h2 class="dtitle">The gallery<br>window opens</h2>
+  <div class="drow"><span class="slot">12:00</span><div class="dbody"><b>Casa Estudio Luis Barragán</b><span>Wed 12–2 only. Book ahead — it sells out</span></div></div>
+  <div class="drow"><span class="slot">14:00</span><div class="dbody"><b>kurimanzutto</b><span>Five min away, Wed 11–6, free. First day of its week</span></div></div>
+  <div class="drow"><span class="slot">20:30</span><div class="dbody"><b>Máximo</b><span>Roma. Reserve. Expendio is closed Wednesdays</span></div></div>
+</div>
+
+<div class="day d8">
+  <p class="dlabel">Thursday · work</p>
+  <h2 class="dtitle">Roma at<br>eye level</h2>
+  <div class="drow"><span class="slot">13:00</span><div class="dbody"><b>Gallery loop</b><span>Nordenhake, Travesía Cuatro, Hilario Galguera. All walkable, all free</span></div></div>
+  <div class="drow"><span class="slot">17:00</span><div class="dbody"><b>Hi-BYE</b><span>Frontera 105bis, closes 7. Conceptual, ungendered, Mexican designers</span></div></div>
+  <div class="drow"><span class="slot">20:00</span><div class="dbody"><b>Expendio de Maíz</b><span>Open Thursdays. Or Mi Compa Chava if you want volume</span></div></div>
+</div>
+
+<div class="day d5">
+  <p class="dlabel">Friday · off</p>
+  <h2 class="dtitle">The architecture<br>day</h2>
+  <div class="drow"><span class="slot">10:00</span><div class="dbody"><b>Casa Gilardi</b><span>Reservation only via casagilardi.mx. ~600 MXN each, cash. Barragán's last house</span></div></div>
+  <div class="drow"><span class="slot">11:45</span><div class="dbody"><b>kurimanzutto</b><span>Five min walk. Fri 11–4</span></div></div>
+  <div class="drow"><span class="slot">13:00</span><div class="dbody"><b>Lunch, San Miguel Chapultepec</b></div></div>
+  <div class="drow"><span class="slot">14:15</span><div class="dbody"><b>Espacio Escultórico, UNAM</b><span>Concrete monoliths on a lava field. Free. Weekdays only and it shuts at 4 — this is the only day you can go</span></div></div>
+  <div class="drow"><span class="slot">16:00</span><div class="dbody"><b>MUAC</b><span>Next door, if there's anything on</span></div></div>
+  <p class="dnote">This day is load-bearing. Book Casa Gilardi now — everything else here is walk-up.</p>
+</div>
+
+<div class="day d9">
+  <p class="dlabel">Saturday · off</p>
+  <h2 class="dtitle">Buy the<br>thing</h2>
+  <div class="drow"><span class="slot">11:00</span><div class="dbody"><b>VOID</b><span>Parral 5, Condesa. Tue–Sat 10–6. Closest thing in this city to a serious avant-garde buy</span></div></div>
+  <div class="drow"><span class="slot">14:00</span><div class="dbody"><b>180º, REvolver, Mecha Mancilla</b><span>Roma browsing, no agenda</span></div></div>
+  <div class="drow"><span class="slot">16:00</span><div class="dbody"><b>Choza</b><span>If Monday got squeezed. Sat 3–9</span></div></div>
+  <div class="drow"><span class="slot">23:00</span><div class="dbody"><b>Yu Yu</b><span>Doctores. Fri/Sat only, 11pm–5am. Phones get stickered. Check the lineup first</span></div></div>
+  <p class="dnote">Fünk Club and Departamento are the fallbacks if Yu Yu's booking is wrong for you.</p>
+</div>
+
+<div class="day d10">
+  <p class="dlabel">Sunday · out</p>
+  <h2 class="dtitle">Fly</h2>
+  <div class="drow"><span class="slot">—</span><div class="dbody"><b>Panadería Rosetta, then MEX</b><span>Leave three hours. Traffic to the airport is unpredictable on Sundays</span></div></div>
+</div>
+
+<section class="cheat" id="cheat">
+  <p class="sechead">Notes</p>
+  <dl>
+    <dt>Cash</dt><dd>Expendio de Maíz and Casa Gilardi are cash-only. Most else takes cards.</dd>
+    <dt>Booking</dt><dd>Casa Gilardi and Casa Estudio Luis Barragán need advance reservations. Contramar, Meroma, Máximo and Masala y Maíz want a table booked. Choza takes none.</dd>
+    <dt>Closed Sunday</dt><dd>Hi-BYE, VOID, Diggin Vinyl, kurimanzutto, Casa Estudio Luis Barragán, Casa Gilardi.</dd>
+    <dt>Closed Monday</dt><dd>Museo Anahuacalli, VOID, kurimanzutto.</dd>
+    <dt>Weekdays only</dt><dd>Espacio Escultórico — 8am to 4pm, and it means it.</dd>
+    <dt>Altitude</dt><dd>2,240m. The first two days feel heavier than they should. Water, and don't over-schedule Saturday.</dd>
+  </dl>
+</section>
+
+<footer>
+  Hours drift. Check before you cross town.<br>
+  Places sourced from the shared list plus additions · Maps links open the app.
+</footer>
+
+</div>
+
+<script>
+const P = [
+ // [name, address, category, hours, note, star]
+ ["Cruzada","Jalapa 185, Roma Norte","Jewelry &amp; objects","Mon–Sat 11–8, Sun 12–6","Hand-forged .925, sculptural and symbol-led. The buy.",1],
+ ["Lengua Concept","Jalapa 125, Roma Norte","Jewelry &amp; objects","Daily 11–8, Sun 12–6","Curated jewelry from many local makers. On your block.",1],
+ ["Haramara Jewelry","Roma Norte","Jewelry &amp; objects","","Small jewelry house.",0],
+ ["Xinú Perfumes","Alejandro Dumas 161, Polanco","Jewelry &amp; objects","Mon–Fri 10–8, Sat–Sun 11–6","Botanical perfume. Flagship does a guided olfactive walkthrough.",1],
+ ["Casa Bosques","Córdoba 25-A, Roma Norte","Jewelry &amp; objects","Daily 11–2, 3–7","Art books, zines, independent publishing. Closes for lunch.",1],
+ ["Pericón","Mexico City","Jewelry &amp; objects","","Pottery.",0],
+ ["A mesa puesta","Mexico City","Jewelry &amp; objects","","Home goods.",0],
+ ["Objetos Cotidianos","Mexico City","Jewelry &amp; objects","","Boutique.",0],
+ ["SELECCIÓN MARSELLA","Mexico City","Jewelry &amp; objects","","Interior design.",0],
+ ["escalina","Mexico City","Jewelry &amp; objects","","Store.",0],
+ ["RAMSU'S MARCOS Y CUADROS","Mexico City","Jewelry &amp; objects","","Framing, if you buy something flat.",0],
+
+ ["Hi-BYE","Frontera 105bis, Roma Norte","Clothing","Daily 12–7, closed Sun","Ungendered and conceptual, Mexican designers.",1],
+ ["VOID","Parral 5, Condesa","Clothing","Tue–Sat 10–6","Luxury vintage and avant-garde over three floors. Rooftop café.",1],
+ ["REvolver Vintage","Mexico City","Clothing","","Vintage.",0],
+ ["180º Shop","Colima 180, Roma Norte","Clothing","Daily 10–8","Local designers, jewelry, sneakers.",0],
+ ["Casa Tigre Blanco","Mexico City","Clothing","","Clothing.",0],
+ ["Proyecto Rufina","Roma Norte","Clothing","","Womenswear.",0],
+ ["Mecha Mancilla","Mexico City","Clothing","","Store.",0],
+
+ ["Black Market Records","Jalapa 164, Roma Norte","Records","Mon–Sat, splits 1:30–4:30","Best-curated shop in Roma. Two doors from Cruzada.",1],
+ ["Revancha","Colima 110, Roma Norte","Records","Daily 12–8, Sun 12–4","Soul, funk, hip hop. Strong second-hand section.",1],
+ ["Georgetown Records","Av. Cuauhtémoc 77b, Roma Norte","Records","Mon–Sat 12–8, Sun 11–6","Surf, garage, niche. Vinyl, CDs and tapes.",1],
+ ["Diggin Vinyl Store","Zacatecas 24 int. 203, Roma Norte","Records","Mon–Fri 2–8, Sat 11–5","Upstairs unit, easy to miss. Fairest prices in the city.",1],
+ ["99 Records Roma","Álvaro Obregón 273, Roma Norte","Records","Daily, late Wed–Sun","Big, heavy on repress, priced up.",0],
+ ["Roma Records","Álvaro Obregón 200, Roma Norte","Records","Daily 12–8, Sun 12–4","Mostly new stock. Convenient rather than essential.",0],
+
+ ["Casa Gilardi","Gral. Antonio León 82, San Miguel Chapultepec","Architecture","Mon–Fri 10–2, Sat 10–1","Barragán's last completed house. Reservation only, cash.",1],
+ ["Casa Estudio Luis Barragán","Gral. Francisco Ramírez 12, Daniel Garza","Architecture","Tue &amp; Fri 11–4, Mon/Wed/Thu 12–2","His own house and studio. Book ahead.",1],
+ ["Espacio Escultórico UNAM","Ciudad Universitaria, Coyoacán","Architecture","Weekdays 8–4, free","Concrete monoliths ringing a lava field.",1],
+ ["Biblioteca Vasconcelos","Eje 1 Nte, Buenavista","Architecture","Daily 8:30–7:30, free","Kalach's hanging stacks. Brutalist and free.",1],
+ ["Casa Pedregal","Jardines del Pedregal","Architecture","By reservation","Barragán in the lava fields.",0],
+ ["La Cuadra San Cristóbal","Atizapán","Architecture","By reservation","Barragán's horse ranch. Out past the north edge.",0],
+ ["Museo Nacional de Arquitectura","Palacio de Bellas Artes","Architecture","","Inside Bellas Artes.",0],
+ ["Casapani","Mexico City","Architecture","","Hotel worth a look.",0],
+
+ ["Museo Anahuacalli","Museo 150, Coyoacán","Museums","Tue–Sun 11–5:30","Rivera's volcanic-stone fortress. Black passages, mosaic ceilings, roof.",1],
+ ["Museo Tamayo","Bosque de Chapultepec","Museums","Tue–Sun","Contemporary, good building.",1],
+ ["Museo Casa Estudio Diego Rivera y Frida Kahlo","San Ángel","Museums","Tue–Sun","O'Gorman's functionalist twin houses.",0],
+ ["Frida Kahlo Museum","Coyoacán","Museums","Book online","Timed entry, always sold out.",0],
+ ["Museo Soumaya","Plaza Carso, Polanco","Museums","Daily","The shell is the point.",0],
+ ["Museo Nacional de Antropología","Chapultepec","Museums","Tue–Sun","Half a day if you go in properly.",0],
+ ["Templo Mayor Museum","Centro Histórico","Museums","Tue–Sun","",0],
+ ["National Art Museum MUNAL","Centro Histórico","Museums","Tue–Sun","",0],
+ ["Museo de la Ciudad de México","Centro Histórico","Museums","Tue–Sun","",0],
+ ["Museo de la Secretaría de Hacienda","Centro Histórico","Museums","Tue–Sun","",0],
+ ["Diego Rivera Mural Museum","Centro Histórico","Museums","Tue–Sun","",0],
+ ["Palacio de Bellas Artes","Centro Histórico","Museums","Tue–Sun","",0],
+ ["National Palace","Zócalo, Centro","Museums","Free, ID needed","Rivera's stairwell murals.",0],
+ ["Basilica of Our Lady of Guadalupe","La Villa","Museums","Daily","",0],
+
+ ["kurimanzutto","Gobernador Rafael Rebollar 94, San Miguel Chapultepec","Galleries","Wed–Thu 11–6, Fri–Sat 11–4","Best gallery in the city. Free.",1],
+ ["Galerie Nordenhake México","Mexico City","Galleries","Tue–Sat","",1],
+ ["Travesía Cuatro CDMX","Mexico City","Galleries","Tue–Sat","",1],
+ ["Galería Hilario Galguera","Mexico City","Galleries","Tue–Sat","",0],
+ ["Galería Vórtice","Mexico City","Galleries","","",0],
+ ["Salón ACME","Mexico City","Galleries","","Art centre, project space.",0],
+ ["Lagos, estudios y residencias para artistas","Mexico City","Galleries","","Artist residency and studios.",0],
+ ["Mooni","Mexico City","Galleries","","",0],
+ ["Cara de Planta Esculturas Vivas","Mexico City","Galleries","","Living sculpture.",0],
+
+ ["Salón Los Ángeles","Lerdo 206, Guerrero","Night","Sun &amp; Tue from ~6:30pm","Live orchestra, danzón, mambo, salsa. Running since the 1930s. Taxi both ways.",1],
+ ["Choza","Monterrey 194, Roma Norte","Night","Sat–Mon ~3–9pm","Thai-leaning food and a custom hi-fi. No sign, no reservations, not on Google. Monday is the listening lounge.",1],
+ ["Yu Yu","Dr. Carmona y Valle 129, Doctores","Night","Fri–Sat 11pm–5am","Basement room, techno-leaning. Cameras get stickered.",1],
+ ["Fünk Club","Mexico City","Night","Weekends","",0],
+ ["LooLoo Studio","Mexico City","Night","Weekends","",0],
+ ["Departamento","Álvaro Obregón 154, Roma Norte","Night","Wed–Sun 6pm–late","Multi-floor with a roof. Gets touristy.",0],
+ ["SIC","Mexico City","Night","","Gay bar.",0],
+ ["Handshake Speakeasy","Mexico City","Night","","Cocktail bar, world's-best lists.",0],
+ ["Bar Las Brujas","Mexico City","Night","","Cocktail bar.",0],
+ ["Cantina Tío Pepe","Centro Histórico","Night","","Old cantina.",0],
+ ["Plaza Garibaldi","Centro Histórico","Night","","Mariachi square.",0],
+
+ ["Contramar","Durango 200, Roma Norte","Food","Daily 12–8, weekends from 11","Tuna tostadas, pescado a la talla. Lunch only. Reserve.",1],
+ ["Expendio de Maíz","Av. Yucatán 84, Roma Norte","Food","Tue/Thu 9–7, Fri–Sat 9–8:30, Sun 9–6","No menu, cash only, communal tables. Closed Mon and Wed.",1],
+ ["Meroma","Colima 150, Roma Norte","Food","Daily 1–11","Five minutes away and open late. The reliable dinner.",1],
+ ["Máximo","Roma Norte","Food","Tue–Sun","Reserve.",1],
+ ["Masala y Maíz","Artículo 123 116, Centro","Food","12–6, closed Tue","Lunch only. Reservation and deposit.",1],
+ ["Molino El Pujol","Benjamín Hill 146, Hipódromo Condesa","Food","Daily 8–6","Tortillas, molletes, chilaquiles. Walk in.",1],
+ ["Taquería Orinoco","Álvaro Obregón 100, Roma Norte","Food","Daily 1pm–3:30am, later weekends","Trompo, chicharrón, res. The late option.",1],
+ ["Páramo","Roma Norte","Food","Daily","",0],
+ ["Fugaz","Mexico City","Food","","",0],
+ ["Félix Parque","Mexico City","Food","","",0],
+ ["Mi Compa Chava Marisquería","Mexico City","Food","Daily, loud","Seafood, big portions, no reservations.",0],
+ ["Tacos La Chula Roma","Roma Norte","Food","Daily","Close to home.",0],
+ ["Tortas Al Fuego","Mexico City","Food","Daily","",0],
+ ["La Casa de Toño Zona Rosa","Zona Rosa","Food","Daily, late","Pozole, cheap, open when nothing else is.",0],
+ ["Caldos de Gallina Luis","Mexico City","Food","Late","",0],
+ ["Por Siempre Vegana 2","Roma / Cuauhtémoc","Food","Daily, late","Vegan tacos al pastor.",0],
+ ["Frutos Prohibidos","Roma Norte","Food","Daily","Lighter lunch, salads and bowls.",0],
+ ["Comedor de los Milagros","Roma Norte","Food","Daily","Latin American food hall.",0],
+ ["Ahumados Pelican","Mexico City","Food","","Smoked meat.",0],
+ ["Bisquets Obregón","Álvaro Obregón, Roma Norte","Food","Daily, early","Old-school breakfast, café con leche poured tableside.",0],
+ ["As Happy As Larry Juice Bar","Mexico City","Food","Daily","Brunch, juices.",0],
+ ["Helado Bonito","Mexico City","Food","Daily","Ice cream.",0],
+ ["Hank's Pizza Choza","Monterrey 192, Roma Norte","Food","Thu–Sun 3pm–late","NY slices. Next door to Choza, same door area.",0],
+
+ ["Panadería Rosetta","Colima 179, Roma Norte","Cafés","Daily from 7","Guava roll. Go before 9 or queue.",1],
+ ["Café Nin","Havre 73, Juárez","Cafés","Daily from 7","Same people as Rosetta, more room.",1],
+ ["Cicatriz","Dinamarca 44, Juárez","Cafés","Daily 9am–midnight","On Plaza Washington. Good all day.",1],
+ ["Cafe Trucha","Roma Norte","Cafés","Daily","",0],
+ ["Forte","Mexico City","Cafés","Daily","",0],
+ ["Clarice Café y Literatura","Mexico City","Cafés","Daily","Books and coffee.",0],
+ ["Blom Nápoles","Nápoles","Cafés","Daily","Serious coffee.",0],
+
+ ["El Bazar Sábado","Plaza San Jacinto, San Ángel","Markets &amp; misc","Saturdays only","Design and craft market. One day a week.",1],
+ ["Mercado de Artesanías La Ciudadela","Centro","Markets &amp; misc","Daily","Craft market, good for gifts.",0],
+ ["Bookstore Fondo de Cultura Económica","Mexico City","Markets &amp; misc","Daily","",0],
+ ["Río de Janeiro Plaza","Roma Norte","Markets &amp; misc","Always","The David square, two minutes from you.",0],
+ ["Huerto Roma Verde","Roma Sur","Markets &amp; misc","Varies","Community garden and weekend markets.",0],
+ ["Haab Project Condesa","Condesa","Markets &amp; misc","Weekdays","Coworking, if the Airbnb wifi fails.",0],
+ ["Safe Space","Mexico City","Markets &amp; misc","","Meditation.",0],
+ ["SOMATICA Massage Therapy","Mexico City","Markets &amp; misc","","",0],
+ ["Centro Cambiario Money Maker","Mexico City","Markets &amp; misc","","Currency exchange.",0]
+];
+
+const CATS = ["All","Jewelry &amp; objects","Clothing","Records","Architecture","Museums","Galleries","Night","Food","Cafés","Markets &amp; misc"];
+let active = "All";
+
+const chips = document.getElementById('chips');
+CATS.forEach(c=>{
+  const b=document.createElement('button');
+  b.className='chip';b.type='button';b.innerHTML=c;
+  b.setAttribute('aria-pressed', c===active);
+  b.onclick=()=>{active=c;[...chips.children].forEach(x=>x.setAttribute('aria-pressed',x.innerHTML===c));render();};
+  chips.appendChild(b);
+});
+
+const strip = s => s.replace(/&amp;/g,'&');
+const maps = (n,a) => 'https://www.google.com/maps/search/?api=1&query='+encodeURIComponent(strip(n)+', '+a);
+
+function render(){
+  const q = document.getElementById('q').value.trim().toLowerCase();
+  const list = document.getElementById('list');
+  const rows = P.filter(p=>{
+    if(active!=="All" && p[2]!==active) return false;
+    if(!q) return true;
+    return (strip(p[0])+' '+p[1]+' '+strip(p[2])+' '+p[4]).toLowerCase().includes(q);
+  });
+  let html='', lastCat=null;
+  rows.forEach(p=>{
+    if(p[2]!==lastCat){ html+='<p class="grouphead">'+p[2]+'</p>'; lastCat=p[2]; }
+    html+='<a class="place" href="'+maps(p[0],p[1])+'" target="_blank" rel="noopener">'
+      +'<p class="pname">'+p[0]+(p[5]?'<span class="star" aria-label="pick">★</span>':'')+'</p>'
+      +'<p class="pmeta">'+p[1]+(p[3]?' · '+p[3]:'')+'</p>'
+      +(p[4]?'<p class="pnote">'+p[4]+'</p>':'')
+      +'<span class="pin">Open in Maps →</span></a>';
+  });
+  list.innerHTML = html || '<p class="empty">Nothing matches. Try a shorter word.</p>';
+  document.getElementById('count').textContent = rows.length+' of '+P.length+' places';
+}
+document.getElementById('q').addEventListener('input', render);
+render();
+</script>
+</body>
+</html>
