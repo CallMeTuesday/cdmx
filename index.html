@@ -71,20 +71,30 @@ nav a:active{color:var(--cal)}
 
 /* ---------- sticky top: nav + mode ---------- */
 .stickytop{position:sticky;top:0;z-index:30;background:var(--basalt);border-bottom:1px solid var(--hair)}
+/* Anchor targets stop below the sticky bar instead of under it. The height is
+   measured at runtime because the nav and switch wrap differently by width. */
+:root{--stickyh:7rem}
+section[id],div[id],[id].street{scroll-margin-top:calc(var(--stickyh) + .5rem)}
 .stickytop nav{position:static;border-bottom:1px solid var(--hair)}
-.modebar{display:flex;align-items:stretch;gap:0}
-.modebar .lbl{
-  flex:0 0 auto;display:flex;align-items:center;padding:0 .75rem 0 1.25rem;
-  font-family:var(--mono);font-size:1rem;color:var(--cal-dim);
+.modebar{display:flex;align-items:center;min-width:0;padding:.5rem 1.25rem}
+/* Track-and-thumb segmented control: the pill track reads as a switch even
+   before you notice which half is filled. */
+.seg{
+  display:flex;flex:1 1 auto;min-width:0;gap:2px;
+  padding:3px;border-radius:999px;
+  background:rgba(239,232,218,.08);border:1px solid var(--hair);
 }
-.seg{display:flex;flex:1;padding:.5rem 1.25rem .5rem 0;gap:0}
 .seg button{
-  flex:1;font-family:var(--mono);font-size:1rem;line-height:1.2;
-  padding:.625rem .5rem;border:1px solid var(--hair);background:transparent;
-  color:var(--cal-dim);cursor:pointer;border-radius:0;white-space:nowrap;
+  /* min-width:0 overrides the flex-item default of auto, so nowrap text
+     cannot push the bar wider than the viewport. */
+  flex:1 1 0;min-width:0;
+  font-family:var(--mono);font-size:.9375rem;line-height:1.2;
+  padding:.5rem .375rem;border:0;border-radius:999px;background:transparent;
+  color:var(--cal-dim);cursor:pointer;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+  transition:background .15s ease,color .15s ease;
 }
-.seg button + button{border-left:0}
-.seg button[aria-pressed="true"]{background:var(--ochre);border-color:var(--ochre);color:var(--basalt)}
+.seg button[aria-pressed="true"]{background:var(--ochre);color:var(--basalt);font-weight:500}
 .seg button:focus-visible{outline:2px solid var(--ochre);outline-offset:2px;position:relative;z-index:1}
 
 /* ---------- generic section ---------- */
@@ -239,27 +249,17 @@ footer{padding:2.25rem 1.25rem 4rem;border-top:1px solid var(--hair);font-family
 
 <div class="stickytop">
   <nav>
-    <a href="#heads-up">Heads-up</a>
     <a href="#street">Your street</a>
     <a href="#places">Places</a>
     <a href="#plan">The plan</a>
     <a href="#cheat">Notes</a>
   </nav>
   <div class="modebar">
-    <span class="lbl">Links open</span>
     <div class="seg" role="group" aria-label="What map links open">
       <button type="button" id="m-place" aria-pressed="true">Show place</button>
-      <button type="button" id="m-dir" aria-pressed="false">Route from here</button>
+      <button type="button" id="m-dir" aria-pressed="false">Directions</button>
     </div>
   </div>
-</div>
-
-<div class="alert" id="heads-up">
-  <h2>Choza closes at 9</h2>
-  <p>Choza is walk-in only, no reservations, not listed on Google, and open <b>Saturday, Sunday and Monday only, roughly 3–9pm</b>. Monterrey 194, next door to Hank's Pizza — no sign.</p>
-  <p>Monday is the Lunes Listening Lounge: three records played end to end with guest selectors. That's the night you want, but if Alice finishes at 7–8 you get under an hour and there's usually a line.</p>
-  <p><b>Fix:</b> go alone around 5:30, wait it out in the downstairs listening room (which is the good part), eat, and have Alice join at 8. Or take it on Saturday instead and lose the listening lounge.</p>
-  <p class="mono">Verify on Instagram @choza_cdmx before you go — hours move.</p>
 </div>
 
 <section class="street" id="street">
@@ -657,6 +657,16 @@ function applyMode(){
 }
 document.getElementById('m-place').onclick = () => { MODE = 'place'; applyMode(); };
 document.getElementById('m-dir').onclick   = () => { MODE = 'dir';   applyMode(); };
+
+/* Feed the real sticky-bar height to the scroll-margin rule, so jump links
+   land on the heading rather than behind the bar at any width. */
+const stickytop = document.querySelector('.stickytop');
+const syncStickyHeight = () =>
+  document.documentElement.style.setProperty('--stickyh', stickytop.offsetHeight + 'px');
+syncStickyHeight();
+addEventListener('resize', syncStickyHeight);
+addEventListener('orientationchange', syncStickyHeight);
+if (document.fonts && document.fonts.ready) document.fonts.ready.then(syncStickyHeight);
 
 
 </script>
