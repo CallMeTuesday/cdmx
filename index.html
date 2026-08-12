@@ -22,6 +22,7 @@
   --mono:'DM Mono',ui-monospace,monospace;
 }
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+a{color:inherit}
 html{scroll-behavior:smooth;font-size:16px;-webkit-text-size-adjust:100%}
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{animation:none!important;transition:none!important}}
 body{
@@ -66,6 +67,25 @@ nav a{
   white-space:nowrap;
 }
 nav a:active{color:var(--cal)}
+
+
+/* ---------- sticky top: nav + mode ---------- */
+.stickytop{position:sticky;top:0;z-index:30;background:var(--basalt);border-bottom:1px solid var(--hair)}
+.stickytop nav{position:static;border-bottom:1px solid var(--hair)}
+.modebar{display:flex;align-items:stretch;gap:0}
+.modebar .lbl{
+  flex:0 0 auto;display:flex;align-items:center;padding:0 .75rem 0 1.25rem;
+  font-family:var(--mono);font-size:1rem;color:var(--cal-dim);
+}
+.seg{display:flex;flex:1;padding:.5rem 1.25rem .5rem 0;gap:0}
+.seg button{
+  flex:1;font-family:var(--mono);font-size:1rem;line-height:1.2;
+  padding:.625rem .5rem;border:1px solid var(--hair);background:transparent;
+  color:var(--cal-dim);cursor:pointer;border-radius:0;white-space:nowrap;
+}
+.seg button + button{border-left:0}
+.seg button[aria-pressed="true"]{background:var(--ochre);border-color:var(--ochre);color:var(--basalt)}
+.seg button:focus-visible{outline:2px solid var(--ochre);outline-offset:2px;position:relative;z-index:1}
 
 /* ---------- generic section ---------- */
 section{padding:2.75rem 1.25rem}
@@ -172,6 +192,22 @@ section{padding:2.75rem 1.25rem}
   font-family:var(--mono);font-size:1rem;line-height:1.55;color:var(--cal-dim);
 }
 
+
+/* map links carry their own style wherever they are generated */
+a.maplink,a.maplink:link,a.maplink:visited,a.maplink:hover,a.maplink:active{
+  color:inherit;text-decoration:none;
+  border-bottom:2px solid currentColor;
+  opacity:1;padding-bottom:1px;
+}
+a.maplink{border-bottom-color:rgba(239,232,218,.5)}
+a.maplink:active{border-bottom-color:currentColor;background:rgba(239,232,218,.12)}
+a.maplink:focus-visible{outline:2px solid var(--ochre);outline-offset:2px;border-radius:1px}
+/* light plane: invert the rule colour so it stays legible */
+.d5 a.maplink{border-bottom-color:rgba(23,21,26,.5)}
+.d5 a.maplink:active{border-bottom-color:var(--basalt);background:rgba(23,21,26,.12)}
+.d10 a.maplink{border-bottom-color:var(--ochre)}
+.taphint{font-family:var(--mono);font-size:1rem;color:var(--cal-dim);margin:0 0 1.5rem;max-width:38ch;line-height:1.5}
+
 /* ---------- cheat ---------- */
 .cheat dl{margin:0}
 .cheat dt{
@@ -201,13 +237,22 @@ footer{padding:2.25rem 1.25rem 4rem;border-top:1px solid var(--hair);font-family
   </div>
 </header>
 
-<nav>
-  <a href="#heads-up">Heads-up</a>
-  <a href="#street">Your street</a>
-  <a href="#places">Places</a>
-  <a href="#plan">The plan</a>
-  <a href="#cheat">Notes</a>
-</nav>
+<div class="stickytop">
+  <nav>
+    <a href="#heads-up">Heads-up</a>
+    <a href="#street">Your street</a>
+    <a href="#places">Places</a>
+    <a href="#plan">The plan</a>
+    <a href="#cheat">Notes</a>
+  </nav>
+  <div class="modebar">
+    <span class="lbl">Links open</span>
+    <div class="seg" role="group" aria-label="What map links open">
+      <button type="button" id="m-place" aria-pressed="true">Show place</button>
+      <button type="button" id="m-dir" aria-pressed="false">Route from here</button>
+    </div>
+  </div>
+</div>
 
 <div class="alert" id="heads-up">
   <h2>Choza closes at 9</h2>
@@ -242,6 +287,7 @@ footer{padding:2.25rem 1.25rem 4rem;border-top:1px solid var(--hair);font-family
 <section style="padding-bottom:0" id="plan">
   <p class="sechead">The plan</p>
   <p class="secsub">Built around the hours that actually constrain you. Everything else is optional.</p>
+  <p class="taphint">Underlined names open in Maps.</p>
 </section>
 
 <div class="day d1">
@@ -249,7 +295,7 @@ footer{padding:2.25rem 1.25rem 4rem;border-top:1px solid var(--hair);font-family
   <h2 class="dtitle">Land, drop bags,<br>walk your street</h2>
   <div class="drow"><span class="slot">11:00</span><div class="dbody"><b>MEX → Jalapa 82</b><span>Uber, 40–70 min depending on traffic</span></div></div>
   <div class="drow"><span class="slot">13:00</span><div class="dbody"><b>Expendio de Maíz</b><span>Yucatán 84, four blocks. No menu, cash only, communal. Open Fri till 8:30</span></div></div>
-  <div class="drow"><span class="slot">15:00</span><div class="dbody"><b>The Jalapa crawl</b><span>Lengua → Black Market → Cruzada. All within five blocks</span></div></div>
+  <div class="drow"><span class="slot">15:00</span><div class="dbody"><b>The Jalapa crawl</b><span>Lengua Concept → Black Market Records → Cruzada. All within five blocks</span></div></div>
   <div class="drow"><span class="slot">17:00</span><div class="dbody"><b>Revancha</b><span>Colima 110. Soul, funk, hip hop, strong used section</span></div></div>
   <div class="drow"><span class="slot">20:00</span><div class="dbody"><b>Taquería Orinoco</b><span>Álvaro Obregón 100. Open till 5:30am Fridays</span></div></div>
   <div class="drow"><span class="slot">23:00</span><div class="dbody"><b>Alice lands</b><span>Orinoco is still open if she wants food after</span></div></div>
@@ -489,7 +535,12 @@ CATS.forEach(c=>{
 });
 
 const strip = s => s.replace(/&amp;/g,'&');
-const maps = (n,a) => 'https://www.google.com/maps/search/?api=1&query='+encodeURIComponent(strip(n)+', '+a);
+let MODE = 'place';
+const SEARCH = 'https://www.google.com/maps/search/?api=1&query=';
+const DIR = 'https://www.google.com/maps/dir/?api=1&destination=';
+// origin is deliberately omitted in dir mode — Maps then routes from wherever you are
+const hrefFor = q => (MODE === 'dir' ? DIR : SEARCH) + encodeURIComponent(q);
+const maps = (n,a) => hrefFor(strip(n)+', '+a);
 
 function render(){
   const q = document.getElementById('q').value.trim().toLowerCase();
@@ -502,17 +553,112 @@ function render(){
   let html='', lastCat=null;
   rows.forEach(p=>{
     if(p[2]!==lastCat){ html+='<p class="grouphead">'+p[2]+'</p>'; lastCat=p[2]; }
-    html+='<a class="place" href="'+maps(p[0],p[1])+'" target="_blank" rel="noopener">'
+    const q = strip(p[0])+', '+p[1];
+    html+='<a class="place" data-q="'+q.replace(/"/g,'&quot;')+'" href="'+hrefFor(q)+'" target="_blank" rel="noopener">'
       +'<p class="pname">'+p[0]+(p[5]?'<span class="star" aria-label="pick">★</span>':'')+'</p>'
       +'<p class="pmeta">'+p[1]+(p[3]?' · '+p[3]:'')+'</p>'
       +(p[4]?'<p class="pnote">'+p[4]+'</p>':'')
-      +'<span class="pin">Open in Maps →</span></a>';
+      +'<span class="pin">'+(MODE==='dir'?'Directions →':'Open in Maps →')+'</span></a>';
   });
   list.innerHTML = html || '<p class="empty">Nothing matches. Try a shorter word.</p>';
   document.getElementById('count').textContent = rows.length+' of '+P.length+' places';
 }
 document.getElementById('q').addEventListener('input', render);
 render();
+
+
+/* ---------- link every place name in the itinerary ---------- */
+const EXTRA = {
+  "MEX":"Mexico City International Airport Benito Juarez",
+  "Jalapa 82":"Jalapa 82, Roma Norte, 06700 Ciudad de Mexico",
+  "MUAC":"MUAC Museo Universitario Arte Contemporaneo, Ciudad Universitaria, CDMX",
+  "San Ángel":"San Angel, Alvaro Obregon, Ciudad de Mexico",
+  "Coyoacán":"Coyoacan, Ciudad de Mexico",
+  "San Miguel Chapultepec":"San Miguel Chapultepec, Miguel Hidalgo, Ciudad de Mexico"
+};
+const ALIAS = {
+  "Rosetta":"Panadería Rosetta",
+  "Anahuacalli":"Museo Anahuacalli",
+  "Espacio Escultórico":"Espacio Escultórico UNAM",
+  "Orinoco":"Taquería Orinoco",
+  "Bazar Sábado":"El Bazar Sábado",
+  "Vasconcelos":"Biblioteca Vasconcelos",
+  "Diggin Vinyl":"Diggin Vinyl Store",
+  "Lengua":"Lengua Concept",
+  "Georgetown":"Georgetown Records",
+  "Nordenhake":"Galerie Nordenhake México",
+  "Travesía Cuatro":"Travesía Cuatro CDMX",
+  "Hilario Galguera":"Galería Hilario Galguera",
+  "Mi Compa Chava":"Mi Compa Chava Marisquería",
+  "Tacos La Chula":"Tacos La Chula Roma",
+  "180º":"180º Shop",
+  "REvolver":"REvolver Vintage",
+  "Salón Los Ángeles":"Salón Los Ángeles"
+};
+
+const TARGET = {};
+P.forEach(p => { TARGET[strip(p[0])] = strip(p[0]) + ', ' + p[1]; });
+Object.entries(EXTRA).forEach(([k,v]) => { TARGET[k] = v; });
+Object.entries(ALIAS).forEach(([k,v]) => { if(TARGET[v]) TARGET[k] = TARGET[v]; });
+
+const SKIP = new Set(["Forte","Choza"].filter(()=>false));
+const KEYS = Object.keys(TARGET).filter(k=>k.length>=3).sort((a,b)=>b.length-a.length);
+const WORD = /[0-9A-Za-zÀ-ÿº]/;
+
+function linkify(root){
+  const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT);
+  const nodes = [];
+  while(walker.nextNode()) nodes.push(walker.currentNode);
+  nodes.forEach(node=>{
+    if(node.parentElement.closest('a')) return;
+    const text = node.nodeValue;
+    let hits = [];
+    KEYS.forEach(k=>{
+      let i = 0;
+      while((i = text.indexOf(k, i)) !== -1){
+        const before = text[i-1], after = text[i+k.length];
+        const clean = (!before || !WORD.test(before)) && (!after || !WORD.test(after));
+        if(clean && !hits.some(h => i < h.end && i + k.length > h.start)){
+          hits.push({start:i, end:i+k.length, key:k});
+        }
+        i += k.length;
+      }
+    });
+    if(!hits.length) return;
+    hits.sort((a,b)=>a.start-b.start);
+    const frag = document.createDocumentFragment();
+    let cursor = 0;
+    hits.forEach(h=>{
+      if(h.start > cursor) frag.appendChild(document.createTextNode(text.slice(cursor,h.start)));
+      const a = document.createElement('a');
+      a.dataset.q = TARGET[h.key];
+      a.href = hrefFor(TARGET[h.key]);
+      a.className = 'maplink';
+      a.target = '_blank'; a.rel = 'noopener';
+      a.textContent = text.slice(h.start,h.end);
+      frag.appendChild(a);
+      cursor = h.end;
+    });
+    if(cursor < text.length) frag.appendChild(document.createTextNode(text.slice(cursor)));
+    node.parentNode.replaceChild(frag, node);
+  });
+}
+document.querySelectorAll('.dbody').forEach(linkify);
+document.querySelectorAll('.street .who').forEach(linkify);
+
+/* ---------- link mode toggle ---------- */
+function applyMode(){
+  document.querySelectorAll('a[data-q]').forEach(a => { a.href = hrefFor(a.dataset.q); });
+  document.querySelectorAll('.place .pin').forEach(el => {
+    el.textContent = MODE === 'dir' ? 'Directions →' : 'Open in Maps →';
+  });
+  document.getElementById('m-place').setAttribute('aria-pressed', MODE === 'place');
+  document.getElementById('m-dir').setAttribute('aria-pressed', MODE === 'dir');
+}
+document.getElementById('m-place').onclick = () => { MODE = 'place'; applyMode(); };
+document.getElementById('m-dir').onclick   = () => { MODE = 'dir';   applyMode(); };
+
+
 </script>
 </body>
 </html>
